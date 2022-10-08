@@ -6,7 +6,6 @@ import { AuthProvider } from './context/AuthContext'
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage';
-import LogoutPage from './pages/LogoutPage';
 import Header from './components/Header';
 import PrivateRoute from './utils/PrivateRoute';
 
