@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
 import AuthContext from '../context/AuthContext'
+import axiosInstance from '../utils/axiosInstance'
 
 const HomePage = () => {
   let [annonces, setAnnonces] = useState([])
@@ -10,19 +11,10 @@ const HomePage = () => {
   }, [])
 
   let getAnnonces = async() => {
-    let response = await fetch('http://127.0.0.1:8000/api/', {
-      method:'GET',
-      headers:{
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + String(authTokens.access)
-      }
-    })
-    let data = await response.json()
-    //
+    let response = await axiosInstance.get('/api/')
     if (response.status === 200){
-        setAnnonces(data)
-    }else if(response.statusText==='Unauthorized'){
-      logoutUser()
+        console.log('OK')
+        setAnnonces(response.data)
     }
   }
   
