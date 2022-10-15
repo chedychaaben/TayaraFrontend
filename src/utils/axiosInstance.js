@@ -31,7 +31,7 @@ axiosInstance.interceptors.request.use(async req => {
         refresh : authTokens.refresh
     })
     // Then Update the localstorage with new values 
-    localStorage.setItem('authTokensnew', JSON.stringify(response.data))
+    localStorage.setItem('authTokens', JSON.stringify(response.data))
 
     // Update headers again with the new token
     req.headers.Authorization = `Bearer ${authTokens ? authTokens.access : null}`

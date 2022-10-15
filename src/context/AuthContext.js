@@ -9,6 +9,8 @@ const AuthContext = createContext()
 export default AuthContext;
 
 
+const baseURL = ''
+
 export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
@@ -18,7 +20,7 @@ export const AuthProvider = ({children}) => {
 
     let loginUser = async (e )=> {
         e.preventDefault()
-        let response = await axios.post('http://127.0.0.1:8000/api/token/',
+        let response = await axios.post(`${baseURL}/api/token/`,
             {'email':e.target.email.value, 'password':e.target.password.value}
         )
         if(response.status === 200){
@@ -43,7 +45,9 @@ export const AuthProvider = ({children}) => {
 
     let contextData = {
         user:user,
+        setUser : setUser,
         authTokens:authTokens,
+        setAuthTokens: setAuthTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
     }

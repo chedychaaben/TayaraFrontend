@@ -1,17 +1,20 @@
 import React, {useContext, useState, useEffect} from 'react'
 import AuthContext from '../context/AuthContext'
-import axiosInstance from '../utils/axiosInstance'
+//import axiosInstance from '../utils/axiosInstance'
+import useAxios from '../utils/useAxios'
 
 const HomePage = () => {
   let [annonces, setAnnonces] = useState([])
   let {user, authTokens, logoutUser} = useContext(AuthContext)
+
+  let api = useAxios()
 
   useEffect( () => {
     getAnnonces()
   }, [])
 
   let getAnnonces = async() => {
-    let response = await axiosInstance.get('/api/')
+    let response = await api.get('/api/')
     if (response.status === 200){
         console.log('OK')
         setAnnonces(response.data)
