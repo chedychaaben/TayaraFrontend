@@ -1,9 +1,7 @@
 import axios from 'axios'
 import jwt_decode from "jwt-decode"
 import dayjs from 'dayjs'
-
-
-const baseURL = 'http://127.0.0.1:8000'
+import { baseURL } from './settings';
 
 // WHY SO SLOW IS IT BECAUSE WE ARE STORING IN LOCALSTORAGE
 let authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null

@@ -1,15 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router-dom'
-import axiosInstance from '../utils/axiosInstance'
 import axios from 'axios';
+import { baseURL } from '../utils/settings';
+
 
 const AuthContext = createContext()
 
 export default AuthContext;
-
-
-const baseURL = ''
 
 export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
@@ -19,7 +17,7 @@ export const AuthProvider = ({children}) => {
     const history = useHistory()
 
     let loginUser = async (e )=> {
-        e.preventDefault()
+        e.preventDefault();
         let response = await axios.post(`${baseURL}/api/token/`,
             {'email':e.target.email.value, 'password':e.target.password.value}
         )
